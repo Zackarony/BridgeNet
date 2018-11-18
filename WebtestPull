@@ -50,18 +50,9 @@ public class googleRes {
 		String ebayPageContentB = ebayPageContentA.replaceAll("Buy It Now", "");
 		String ebayPageContentC = ebayPageContentB.replaceAll("Free Shipping", "");
 		String ebayPageContentD = ebayPageContentC.replaceAll("Brand New", "");
-		int one = 2;
-		int two = 3;
 		
-		
-		
-		String itemBegin = "out of 5 stars";
-		int itemStart  = ordinalIndexOf(amazonPageContentA, itemBegin, one);
-		
-		int itemEnd = ordinalIndexOf(amazonPageContentA, itemBegin, two);
-		
-		itemStart -= 4;
-		itemEnd -= 4;
+	
+	
 		
 		//Safety net for the last item
 //		if(itemEnd < 0);
@@ -69,65 +60,117 @@ public class googleRes {
 //			itemEnd = amazonPageContentA.length() - 1;
 //		}
 		
-		String itemOne = amazonPageContentA.substring(itemStart, itemEnd);
+		
 			
 		
-			int ichi = 3;
-			int ni = 4;
-			int san = 5;
 			
-			String saftey = "Best Seller";
-			if(itemOne.indexOf(saftey) != -1)
-			{
-				ichi = 4;
-				ni = 5;
-				san = 6;
-				
-			}
 		//price	
-			int priceStart = ordinalIndexOf(itemOne, "\n", san);
-			String e = itemOne.substring(priceStart);
-			int no = priceStart;
-			int priceEnd = ordinalIndexOf(e, " ", 1);
 			
-			String price = e.substring(0, priceEnd);
+		
+			
+			
 		//price	
 		
 		
 		//name
-			int nameIndexStart = ordinalIndexOf(itemOne, "\n", ichi);
-			int nameIndexEnd = ordinalIndexOf(itemOne, "\n", ni);
+			
 		
-			String name = itemOne.substring(nameIndexStart, nameIndexEnd);
-		
+			
 		
 		
 			ArrayList<amazonItem> amazonList = new ArrayList<amazonItem>();
 			
 		//name
 			
-			while(two != -1) {
-				amazonItem item = new amazonItem(name, price);
 			
+			
+			int one = 2;
+			int two = 3;
+			
+			String itemBegin;
+			int itemStart = 4;
+			int itemEnd = 5;
+			int ichi;
+			int ni;
+			int san;
+			
+			String saftey;
+			int priceStart;
+			int no;
+			int priceEnd;
+			int nameIndexStart;
+			int nameIndexEnd;
+			String price;
+			String name;
+			String itemOne;
+			for(int i = 0; i < 22; i++) {
+				
+				
+				
+
+				
+				
+				
+				itemBegin = "out of 5 stars";
+				itemStart -= 4;
+				itemEnd -= 4;
+				itemStart  = ordinalIndexOf(amazonPageContentA, itemBegin, one);
+				
+				itemEnd = ordinalIndexOf(amazonPageContentA, itemBegin, two);
+				itemOne = amazonPageContentA.substring(itemStart, itemEnd);
+				
+				
+				
+				ichi = 3;
+				ni = 4;
+				san = 5;
+				
+				saftey = "Best Seller";
+				if(itemOne.indexOf(saftey) != -1)
+				{
+					ichi = 4;
+					ni = 5;
+					san = 6;
+					
+				}
+				
+				
+				priceStart = ordinalIndexOf(itemOne, "\n", san);
+				String e = itemOne.substring(priceStart);
+				no = priceStart;
+				priceEnd = ordinalIndexOf(e, " ", 1);
+				
+				nameIndexStart = ordinalIndexOf(itemOne, "\n", ichi);
+				nameIndexEnd = ordinalIndexOf(itemOne, "\n", ni);
+				
+				price = e.substring(0, priceEnd);
+				name = itemOne.substring(nameIndexStart, nameIndexEnd);
+				
+				
+				amazonItem item = new amazonItem(name, price);
+				amazonList.add(item);
+				one++;
+				two++;
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 			}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		int check = itemOne.indexOf("\n");
-		
-		
-		
-		
-		
 		
 		
 		
@@ -143,13 +186,12 @@ public class googleRes {
 		System.out.println(itemEnd);
 		System.out.println("__________________________________________________________________________________________");
 		
-		System.out.println(itemOne);
-		System.out.println("__________________________________________________________________________________________");
-		System.out.println(check);
-		System.out.println("__________________________________________________________________________________________");
-		System.out.println(name);
-		System.out.println(price);
-		
+		for(int i = 0; i < 22; i++)
+		{
+		System.out.println(amazonList.get(i));
+		}
+
+
 		
 
 	}
@@ -172,5 +214,4 @@ public class googleRes {
 
 
 }
-
 
