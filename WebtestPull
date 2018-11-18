@@ -1,7 +1,7 @@
 //The user input tool
-import java.util.Scanner; 
-
-
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -37,22 +37,140 @@ public class googleRes {
 		String amazonPageContent = amazonPage.asText();
 		HtmlPage ebayPage = webClient.getPage(ebay + searchTerm + "&rt=nc&LH_BIN=1");
 		String ebayPageContent = ebayPage.asText();
-		String begin = "SPONSORED";
-		String end = "Tell us what you think";
-		String free = "Free Shipping";
-		int ebayA = ebayPageContent.indexOf(begin);
-		int ebayB = ebayPageContent.indexOf(end);
+		String ebayBegin = "SPONSORED";
+		String ebayEnd = "Tell us what you think";
+		String amazonEnd = "Previous Page";
+		String amazonBegin = "[Sponsored]";
+		int amazonA = amazonPageContent.indexOf(amazonBegin);
+		int amazonB = amazonPageContent.indexOf(amazonEnd);
+		String amazonPageContentA = amazonPageContent.substring(amazonA, amazonB);
+		int ebayA = ebayPageContent.indexOf(ebayBegin);
+		int ebayB = ebayPageContent.indexOf(ebayEnd);
 		String ebayPageContentA = ebayPageContent.substring(ebayA, ebayB);
+		String ebayPageContentB = ebayPageContentA.replaceAll("Buy It Now", "");
+		String ebayPageContentC = ebayPageContentB.replaceAll("Free Shipping", "");
+		String ebayPageContentD = ebayPageContentC.replaceAll("Brand New", "");
+		int one = 2;
+		int two = 3;
 		
 		
-		System.out.println(ebayPageContentA);
+		
+		String itemBegin = "out of 5 stars";
+		int itemStart  = ordinalIndexOf(amazonPageContentA, itemBegin, one);
+		
+		int itemEnd = ordinalIndexOf(amazonPageContentA, itemBegin, two);
+		
+		itemStart -= 4;
+		itemEnd -= 4;
+		
+		//Safety net for the last item
+//		if(itemEnd < 0);
+//		{
+//			itemEnd = amazonPageContentA.length() - 1;
+//		}
+		
+		String itemOne = amazonPageContentA.substring(itemStart, itemEnd);
+			
+		
+			int ichi = 3;
+			int ni = 4;
+			int san = 5;
+			
+			String saftey = "Best Seller";
+			if(itemOne.indexOf(saftey) != -1)
+			{
+				ichi = 4;
+				ni = 5;
+				san = 6;
+				
+			}
+		//price	
+			int priceStart = ordinalIndexOf(itemOne, "\n", san);
+			String e = itemOne.substring(priceStart);
+			int no = priceStart;
+			int priceEnd = ordinalIndexOf(e, " ", 1);
+			
+			String price = e.substring(0, priceEnd);
+		//price	
+		
+		
+		//name
+			int nameIndexStart = ordinalIndexOf(itemOne, "\n", ichi);
+			int nameIndexEnd = ordinalIndexOf(itemOne, "\n", ni);
+		
+			String name = itemOne.substring(nameIndexStart, nameIndexEnd);
+		
+		
+		
+			ArrayList<amazonItem> amazonList = new ArrayList<amazonItem>();
+			
+		//name
+			
+			while(two != -1) {
+				amazonItem item = new amazonItem(name, price);
+			
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		int check = itemOne.indexOf("\n");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		System.out.println(ebayPageContentD);
 		System.out.println("__________________________________________________________________________________________");
-		System.out.println(amazonPageContent);
+		System.out.println(amazonPageContentA);
+		System.out.println("__________________________________________________________________________________________");
+		System.out.println(itemStart);
+		System.out.println(itemEnd);
+		System.out.println("__________________________________________________________________________________________");
+		
+		System.out.println(itemOne);
+		System.out.println("__________________________________________________________________________________________");
+		System.out.println(check);
+		System.out.println("__________________________________________________________________________________________");
+		System.out.println(name);
+		System.out.println(price);
+		
+		
 
+	}
+	public String replaceAll(String regex, String replacement)
+	{
+	    return Pattern.compile(regex).matcher((CharSequence) this).replaceAll(replacement);
+	}
+	
+	public static int ordinalIndexOf(String str, String substr, int n)
+	{
+		int pos = str.indexOf(substr);
+		while (--n > 0 && pos != -1)
+		{
+			pos = str.indexOf(substr, pos + 1);
+		}
 		
-		
-		
+		return pos;
 	}
 
 
+
 }
+
+
