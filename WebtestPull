@@ -13,7 +13,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
 public class googleRes {
-	
+	public static int amountOfItems = 22;
 	
 	
 	
@@ -95,6 +95,7 @@ public class googleRes {
 			int san;
 			
 			String saftey;
+			String saftey2;
 			int priceStart;
 			int no;
 			int priceEnd;
@@ -103,7 +104,7 @@ public class googleRes {
 			String price;
 			String name;
 			String itemOne;
-			for(int i = 0; i < 22; i++) {
+			for(int i = 0; i < amountOfItems; i++) {
 				
 				
 				
@@ -126,6 +127,7 @@ public class googleRes {
 				san = 5;
 				
 				saftey = "Best Seller";
+				saftey2 = "...";
 				if(itemOne.indexOf(saftey) != -1)
 				{
 					ichi = 4;
@@ -186,7 +188,7 @@ public class googleRes {
 		System.out.println(itemEnd);
 		System.out.println("__________________________________________________________________________________________");
 		
-		for(int i = 0; i < 22; i++)
+		for(int i = 0; i < amountOfItems; i++)
 		{
 		System.out.println(amazonList.get(i));
 		}
@@ -214,4 +216,6 @@ public class googleRes {
 
 
 }
+
+
 
