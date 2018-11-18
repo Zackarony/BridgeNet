@@ -1,3 +1,7 @@
+//The user input tool
+import java.util.Scanner; 
+
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -6,22 +10,49 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
+
+
 public class googleRes {
-
-
-
+	
+	
+	
+	
+	private static final String String = null;
+	static //String searchTerm = readLine("What do you want to search for? ");
+	String amazon = "https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=";
+	static String  ebay = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR11.TRC2.A0.H0.Xbike.TRS1&_nkw=";
+	
+	
+	
 	public static void main(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+		//Create new scanner
+		Scanner userInputScanner = new Scanner(System.in);
+		//Asks and creates the search term
+		System.out.println("\nWhat do you want to search for?");
+		String searchTerm = userInputScanner.nextLine();
 		
 		WebClient webClient = new WebClient(BrowserVersion.CHROME);
 		webClient.getOptions().setJavaScriptEnabled(false);
-		HtmlPage page = webClient.getPage("https://spokane.craigslist.org/search/sss?query=bikes&sort=rel"); //"Page" is supposed to be "HtmlPage", but Eclipse won't run if it is
-		String pageContent = page.asText();
-		System.out.println(pageContent);
+		HtmlPage amazonPage = webClient.getPage(amazon + searchTerm); 
+		String amazonPageContent = amazonPage.asText();
+		HtmlPage ebayPage = webClient.getPage(ebay + searchTerm + "&rt=nc&LH_BIN=1");
+		String ebayPageContent = ebayPage.asText();
+		String begin = "SPONSORED";
+		String end = "Tell us what you think";
+		String free = "Free Shipping";
+		int ebayA = ebayPageContent.indexOf(begin);
+		int ebayB = ebayPageContent.indexOf(end);
+		String ebayPageContentA = ebayPageContent.substring(ebayA, ebayB);
+		
+		
+		System.out.println(ebayPageContentA);
+		System.out.println("__________________________________________________________________________________________");
+		System.out.println(amazonPageContent);
+
 		
 		
 		
 	}
-
 
 
 }
